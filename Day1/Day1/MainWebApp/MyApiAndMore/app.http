@@ -1,0 +1,25 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+GET https://localhost:7249
+Accept:application/josn
+test:wow
+
+#####
+
+OPTIONS https://localhost:7249/shimon?id=2
+test:wow
+
+#####
+
+GET https://localhost:7249/home.html
+test:wow
+
+####
+GET https://localhost:7249/time
+
+
+
+####
+GET https://localhost:7249/config
+
+####
+GET https://localhost:7249/sendEmailViaService
