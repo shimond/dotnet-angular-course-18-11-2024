@@ -1,0 +1,19 @@
+<div>
+    <input
+           type="text"
+           placeholder="Search customers..."
+           [formControl]="searchControl" />
+    <button (click)="store.loadCustomers()">Load Customers</button> @if(store.isLoading()){ <p>Loading...</p> } <ul>
+        @for(customer of store.filteredCustomers(); track customer.id) { <li
+            (click)="store.selectCustomer(customer.id)">
+            <p><strong>{{ customer.name }}</strong></p>
+            <p>Gender: {{ customer.gender }}</p>
+            <p>Phone: {{ customer.phone }}</p>
+            <p>Email: {{ customer.email }}</p>
+        </li> } </ul> @if(store.selectedCustomer()) { <div class="selected">
+      
+            <strong>Selected Customer Details:</strong>
+        <br /> Name: {{ store.selectedCustomer()?.name }} <br /> Gender: {{ store.selectedCustomer()?.gender }} <br />
+        Phone: {{ store.selectedCustomer()?.phone }} <br /> Email: {{ store.selectedCustomer()?.email }}
+        </div> }
+</div>

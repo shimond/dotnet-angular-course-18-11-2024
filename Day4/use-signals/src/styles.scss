@@ -1,0 +1,106 @@
+// Variables for easy customization
+$primary-color: #4caf50;
+$secondary-color: #ffffff;
+$text-color: #333333;
+$hover-color: #388e3c;
+$border-radius: 5px;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+// Base styles
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: $text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+// Container for the component
+div {
+  width: 100%;
+  max-width: 600px;
+  background-color: $secondary-color;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  border: 1px solid #ddd;
+}
+
+// Input field styles
+input[type='text'] {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: $border-radius;
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 4px $primary-color;
+  }
+}
+
+// Button styles
+button {
+  display: inline-block;
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: none;
+  padding: 10px 15px;
+  border-radius: $border-radius;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// Loading text
+p {
+  margin: 10px 0;
+  font-style: italic;
+  color: $primary-color;
+}
+
+// Customer list styles
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgba(76, 175, 80, 0.1);
+    }
+
+    p {
+      margin: 5px 0;
+
+      &:first-of-type {
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+// Selected customer details
+strong {
+  color: $primary-color;
+  display: block;
+  margin-top: 20px;
+}
+
