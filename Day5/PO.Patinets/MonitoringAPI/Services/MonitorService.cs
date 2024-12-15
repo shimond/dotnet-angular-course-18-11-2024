@@ -1,4 +1,6 @@
-﻿using MonitoringAPI.Contracts;
+﻿using Microsoft.AspNetCore.SignalR;
+using MonitoringAPI.Contracts;
+using MonitoringAPI.Hubs;
 using MonitoringAPI.Models;
 using Patients.EventBus.Abstraction;
 using StackExchange.Redis;
@@ -9,11 +11,16 @@ namespace MonitoringAPI.Services;
 public class MonitorService : IMonitorService
 {
     private readonly IPOEventBus _eventBus;
+    private readonly IHubContext<MonitorHub> _monitorHubContext;
     private readonly IDatabase _redisDb;
 
-    public MonitorService(IConnectionMultiplexer redisConnection, IPOEventBus eventBus)
+    public MonitorService(
+        IConnectionMultiplexer redisConnection, 
+        IPOEventBus eventBus , 
+        IHubContext<MonitorHub> monitorHubContext)
     {
         _eventBus = eventBus;
+        _monitorHubContext = monitorHubContext;
         _redisDb = redisConnection.GetDatabase();
     }
 
@@ -37,11 +44,17 @@ public class MonitorService : IMonitorService
         string value = JsonSerializer.Serialize(request);
 
         await _redisDb.StringSetAsync(key, value);
+        await PublishToClients(request.PatientId, request); 
         await _eventBus.Publish(new PatientDataMsg { 
             PatientId = request.PatientId,
             Fever = request.Fever,
             MsgTime = DateTime.Now
         });
+    }
+
+    private Task PublishToClients(int patientId, MonitorRequest request)
+    {
+        return _monitorHubContext.Clients.Group($"patient:{patientId}").SendAsync("ReceivePatientData", request);
     }
 
     private static string GetRedisKey(int patientId)
