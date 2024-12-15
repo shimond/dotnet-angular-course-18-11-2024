@@ -9,11 +9,11 @@ using MonitoringAPI.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("Rabbit"));
-
+builder.AddRabbitMQClient("rabbitPOClient");
 builder.Services.AddSingleton<IConnectionMultiplexer>(
     _ => ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("myRedis"))
 );
+builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("Rabbit"));
 
 builder.Services.AddCors(x => x.AddDefaultPolicy(
     p =>

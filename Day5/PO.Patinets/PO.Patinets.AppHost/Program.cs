@@ -1,9 +1,24 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.ClientApplcationBFF>("clientapplcationbff");
+var redis = builder.AddRedis("myRedis");
+var sql = builder.AddSqlServer("myPatientsDb")    
+                        .WithLifetime(ContainerLifetime.Persistent);
 
-builder.AddProject<Projects.MonitoringAPI>("monitoringapi");
+var rabbit = builder.AddRabbitMQ("rabbitPOClient");
 
-builder.AddProject<Projects.Patients_CatalogAPI>("patients-catalogapi");
+var monitor = builder.AddProject<Projects.MonitoringAPI>("monitoringapi")
+    .WithReference(rabbit)
+    .WithReference(redis)
+    .WaitFor(redis).WaitFor(rabbit);
+
+var catalog = builder.AddProject<Projects.Patients_CatalogAPI>("patients-catalogapi")
+    .WithReference(sql)
+    .WaitFor(sql);
+
+
+builder.AddProject<Projects.ClientApplcationBFF>("clientapplcationbff")
+        .WithReference(catalog)
+        .WithReference(monitor);
 
 builder.Build().Run();
+

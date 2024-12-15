@@ -12,7 +12,7 @@ export class MonitorNotificationService {
     monitorChanged$ = this.monitorChanged.asObservable();
 
     private hubConnection!: signalR.HubConnection;
-    private readonly hubUrl = 'http://localhost:1147/api/monitor/monitorhub'; // Replace with your backend URL
+    private readonly hubUrl = 'https://localhost:7257/api/monitor/monitorhub'; // Replace with your backend URL
 
     constructor() { }
 

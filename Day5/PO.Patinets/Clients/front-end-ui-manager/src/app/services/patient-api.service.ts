@@ -6,7 +6,7 @@ import { PatientModel } from '../models/patient.model';
     providedIn: 'root'
 })
 export class PatientApiService {
-    #baseUrl = 'http://localhost:1147';
+    #baseUrl = 'https://localhost:7257';
     #http = inject(HttpClient);
 
     getPatients() {

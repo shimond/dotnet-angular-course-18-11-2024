@@ -9,7 +9,8 @@ o.AllowAnyHeader()
 .SetIsOriginAllowed(o => true)
 .AllowAnyMethod()));
 builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+    .AddServiceDiscoveryDestinationResolver();
 
 
 var app = builder.Build();

@@ -12,21 +12,17 @@ public class RabbitMQEventBus : IPOEventBus
 {
     private readonly string _hostname;
     private readonly string _exchangeName;
-    private readonly ConnectionFactory _factory;
+    private readonly IConnectionFactory _factory;
     private readonly IConnection _connection;
     private readonly IModel _channel;
 
-    public RabbitMQEventBus(IOptions<RabbitMQSettings> options)
+    public RabbitMQEventBus(IConnectionFactory factory , IOptions<RabbitMQSettings> options)
     {
+        _factory = factory;
         var settings = options.Value;
-        _hostname = settings.Hostname;
-        _exchangeName = settings.ExchangeName;
-
-        _factory = new ConnectionFactory { HostName = _hostname, Port= settings.Port, UserName= settings.UserName, Password = settings.Password };
         _connection = _factory.CreateConnection();
         _channel = _connection.CreateModel();
-
-        // Declare the exchange
+        _exchangeName = settings.ExchangeName;
         _channel.ExchangeDeclare(exchange: _exchangeName, type: ExchangeType.Fanout);
     }
 
@@ -42,7 +38,7 @@ public class RabbitMQEventBus : IPOEventBus
             body: body
         );
 
-        await Task.CompletedTask; // RabbitMQ publish is synchronous, so we just return a completed task
+        await Task.CompletedTask; 
     }
 
     public async Task Subscribe<T>(Action<T> callBack) where T : IntegrationMsg

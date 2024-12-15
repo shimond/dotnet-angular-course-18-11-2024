@@ -1,5 +1,4 @@
-@ClientApplcationBFF_HostAddress = http://localhost:1147
-
+@ClientApplcationBFF_HostAddress = https://localhost:7257
 ### Create a new patient
 POST {{ClientApplcationBFF_HostAddress}}/api/catalog/patients
 Content-Type: application/json
@@ -20,10 +19,14 @@ GET {{ClientApplcationBFF_HostAddress}}/api/catalog/patients/2
 Content-Type: application/json
 
 ###
-POST  http://localhost:1147/api/monitor/monitor-patient
+POST {{ClientApplcationBFF_HostAddress}}/api/monitor/monitor-patient
 Content-Type: application/json
 
 {
     "patientId":1,
-    "fever":98
+    "fever":44
 }
+
+###
+GET {{ClientApplcationBFF_HostAddress}}/api/monitor/monitor-patient/2
+Content-Type: application/json
