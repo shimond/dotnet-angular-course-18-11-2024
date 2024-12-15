@@ -3,6 +3,8 @@ using Patients.CatalogAPI.Apis;
 using Patients.CatalogAPI.DataContext;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services.AddDbContext<PatientsDataContext>
     (x=> x.UseSqlServer(builder.Configuration.GetConnectionString("myPatientsDb")));
 
@@ -10,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<PatientsDataContext>();
 await dbContext.Database.EnsureCreatedAsync();

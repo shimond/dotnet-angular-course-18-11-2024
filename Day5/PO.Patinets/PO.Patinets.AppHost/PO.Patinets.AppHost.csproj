@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ClientApplcationBFF\ClientApplcationBFF.csproj" />
     <ProjectReference Include="..\MonitoringAPI\MonitoringAPI.csproj" />
+    <ProjectReference Include="..\Patients.CatalogAPI\Patients.CatalogAPI.csproj" />
   </ItemGroup>
 
 </Project>
