@@ -1,4 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(c => c.AddDefaultPolicy(o =>
 
@@ -11,6 +13,8 @@ builder.Services.AddReverseProxy()
 
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 app.UseCors();
 app.MapReverseProxy();
 

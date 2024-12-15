@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patients.EventBus.Abstracti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patients.EventBus.Rabbit", "Patients.EventBus.Rabbit\Patients.EventBus.Rabbit.csproj", "{A50050A6-48E4-4824-8962-24479ADE1183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PO.Patinets.AppHost", "PO.Patinets.AppHost\PO.Patinets.AppHost.csproj", "{C0FE4EA4-04E7-46D2-9175-124192D765A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PO.Patinets.ServiceDefaults", "PO.Patinets.ServiceDefaults\PO.Patinets.ServiceDefaults.csproj", "{31CE5550-C35D-4914-9D5F-BA6B08B85D4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,14 @@ Global
 		{A50050A6-48E4-4824-8962-24479ADE1183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A50050A6-48E4-4824-8962-24479ADE1183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A50050A6-48E4-4824-8962-24479ADE1183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FE4EA4-04E7-46D2-9175-124192D765A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FE4EA4-04E7-46D2-9175-124192D765A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FE4EA4-04E7-46D2-9175-124192D765A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FE4EA4-04E7-46D2-9175-124192D765A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CE5550-C35D-4914-9D5F-BA6B08B85D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CE5550-C35D-4914-9D5F-BA6B08B85D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CE5550-C35D-4914-9D5F-BA6B08B85D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CE5550-C35D-4914-9D5F-BA6B08B85D4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
