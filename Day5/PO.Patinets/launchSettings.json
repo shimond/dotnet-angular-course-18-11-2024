@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "usecontainers": "StartDebugging",
+        "patients.catalogapi": "StartDebugging",
+        "monitoringapi": "StartDebugging",
+        "clientapplcationbff": "StartDebugging"
+      }
+    }
+  }
+}
