@@ -18,3 +18,12 @@ Content-Type: application/json
 ###
 GET {{ClientApplcationBFF_HostAddress}}/api/catalog/patients/2
 Content-Type: application/json
+
+###
+POST  http://localhost:1147/api/monitor/monitor-patient
+Content-Type: application/json
+
+{
+    "patientId":1,
+    "fever":98
+}

@@ -3,4 +3,5 @@ export interface PatientModel {
     readonly name: string;
     readonly birthdate: string;
     readonly gender: string;
-  }
+}
+

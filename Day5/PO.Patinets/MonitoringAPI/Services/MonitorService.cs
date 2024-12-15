@@ -32,15 +32,12 @@ public class MonitorService : IMonitorService
         if (data.IsNullOrEmpty)
             return null;
 
-        // Deserialize the JSON data back into a MonitorRequest object
         return JsonSerializer.Deserialize<MonitorRequest>(data);
     }
 
     public async Task SavePatientMonitoringAsync(MonitorRequest request)
     {
         string key = GetRedisKey(request.PatientId);
-
-        // Serialize the MonitorRequest object to JSON
         string value = JsonSerializer.Serialize(request);
 
         await _redisDb.StringSetAsync(key, value);

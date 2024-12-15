@@ -18,7 +18,7 @@ builder.Services.AddCors(x => x.AddDefaultPolicy(
         p.AllowAnyMethod()
         .AllowCredentials()
         .AllowAnyHeader()
-        .SetIsOriginAllowed(_ => true)));
+        .WithOrigins("http://localhost:4200")));
     
 builder.Services.AddSignalR();
 builder.Services.AddScoped<IMonitorService, MonitorService>();

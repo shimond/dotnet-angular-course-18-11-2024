@@ -1,3 +1,4 @@
+<div>
 <mat-table [dataSource]="store.allPatients()">
     <!-- Add columns with Hebrew titles -->
     <ng-container matColumnDef="id">
@@ -26,7 +27,8 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
 
-
+</div>
+<div class="patient-area">
 @if(store.selectedPatient())
 {
 <div>
@@ -36,4 +38,13 @@
     <p>תאריך לידה: {{ store.selectedPatient()?.birthdate | date:'MM/yyyy' }}</p>
     <p>מין: {{ store.selectedPatient()?.gender}}</p>
 </div>
+
+<div>
+    <h2>חום מוניטור</h2>
+    @for(status of store.monitorStatus(); track status)
+    {
+        <p>{{ status.date | date:'dd/MM/yyyy HH:mm' }}: {{ status.fever }}°C</p>
+    }
+</div>
 }
+</div>
