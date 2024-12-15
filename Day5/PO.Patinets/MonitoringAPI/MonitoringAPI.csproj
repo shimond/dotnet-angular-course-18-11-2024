@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -15,5 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Patients.EventBus.Abstraction\Patients.EventBus.Abstraction.csproj" />
     <ProjectReference Include="..\Patients.EventBus.Rabbit\Patients.EventBus.Rabbit.csproj" />
+    <ProjectReference Include="..\PO.Patinets.ServiceDefaults\PO.Patinets.ServiceDefaults.csproj" />
   </ItemGroup>
 </Project>

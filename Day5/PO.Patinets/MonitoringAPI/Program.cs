@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Builder;
 using MonitoringAPI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("Rabbit"));
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(
@@ -27,6 +29,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRabbit();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 app.UseCors();
 app.Use(async (context, next) => {
     await next(); // for debug
