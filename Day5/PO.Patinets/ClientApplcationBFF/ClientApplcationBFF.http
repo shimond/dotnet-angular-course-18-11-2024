@@ -1,6 +1,20 @@
-@ClientApplcationBFF_HostAddress = http://localhost:5164
+@ClientApplcationBFF_HostAddress = http://localhost:1147
 
-GET {{ClientApplcationBFF_HostAddress}}/weatherforecast/
-Accept: application/json
+### Create a new patient
+POST {{ClientApplcationBFF_HostAddress}}/api/catalog/patients
+Content-Type: application/json
+
+{
+  "name": "Moshe Cohen",
+  "birthdate": "1989-01-01T00:00:00",
+  "gender": "male"
+}
 
 ###
+GET {{ClientApplcationBFF_HostAddress}}/api/catalog/patients
+Content-Type: application/json
+
+
+###
+GET {{ClientApplcationBFF_HostAddress}}/api/catalog/patients/2
+Content-Type: application/json

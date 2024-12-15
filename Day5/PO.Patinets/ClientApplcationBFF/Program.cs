@@ -3,6 +3,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
+
 var app = builder.Build();
 
 app.MapReverseProxy();

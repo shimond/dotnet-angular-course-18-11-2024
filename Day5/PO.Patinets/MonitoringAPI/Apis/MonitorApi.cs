@@ -21,7 +21,6 @@ namespace MonitoringAPI.Apis
             {
                 return TypedResults.Ok(res);
             }
-
             return TypedResults.NotFound();
 
         }

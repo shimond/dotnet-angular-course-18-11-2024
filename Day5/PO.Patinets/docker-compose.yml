@@ -1,12 +1,4 @@
 services:
-  seq:
-    image: datalust/seq:latest
-    container_name: seq
-    environment:
-      - ACCEPT_EULA=Y  # Accepts the End User License Agreement
-    ports:
-      - "5341:80" 
-
 
   redis:
     image: redis:latest
@@ -23,15 +15,10 @@ services:
       - MSSQL_PID=Express  # Choose edition (Express, Developer, etc.)
     ports:
       - "1435:1433"
-
-  # usecontainers:
-  #   image: ${DOCKER_REGISTRY-}usecontainers
-  #   build:
-  #     context: .
-  #     dockerfile: UseContainers/Dockerfile
-  #   depends_on:
-  #       - seq
-      
+    volumes:
+        - sql_data:/var/opt/mssql
+  
+        
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -42,6 +29,7 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
 
+### INNER SERVICES ###
   patients.catalogapi:
     container_name: patients_catalogapi
     image: ${DOCKER_REGISTRY-}patientscatalogapi
@@ -58,7 +46,8 @@ services:
     build:
       context: .
       dockerfile: MonitoringAPI/Dockerfile
-
+    depends_on:
+        - redis
 
   clientapplcationbff:
     image: ${DOCKER_REGISTRY-}clientapplcationbff
@@ -66,3 +55,7 @@ services:
       context: .
       dockerfile: ClientApplcationBFF/Dockerfile
 
+
+volumes:
+  sql_data:
+    driver: local
