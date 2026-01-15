@@ -1,0 +1,38 @@
+### Payload Mismatch - Wrong DTO for Enum
+### Expected: 400 Bad Request - JSON deserialization error
+### Sending Employee payload but declaring PersonType as Manager (2)
+### Missing required Manager fields: teamSize, directReports
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "EMP-999",
+    "name": "Wrong Type",
+    "age": 30,
+    "department": "Engineering",
+    "salary": 75000.00,
+    "employeeNumber": "E999999"
+  }
+}
+
+###
+
+### Another Payload Mismatch - Missing Required Fields
+### Expected: 400 Bad Request - JSON deserialization error
+### Sending incomplete Student payload (missing studentId)
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 3,
+  "payload": {
+    "id": "STU-999",
+    "name": "Incomplete Student",
+    "age": 20,
+    "major": "Physics",
+    "gpa": 3.5,
+    "year": 2
+  }
+}

@@ -1,0 +1,214 @@
+###############################################################################
+# Complete Test Suite for Enum-Based Polymorphic Service Resolution
+# ASP.NET 9 Minimal API - Strategy + Resolver Pattern Demo
+###############################################################################
+
+### 1. Valid Employee Request
+### Expected: 200 OK
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 1,
+  "payload": {
+    "id": "EMP-001",
+    "name": "John Doe",
+    "age": 35,
+    "department": "Engineering",
+    "salary": 95000.50,
+    "employeeNumber": "E123456"
+  }
+}
+
+###
+
+### 2. Valid Manager Request
+### Expected: 200 OK
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "MGR-001",
+    "name": "Sarah Johnson",
+    "age": 42,
+    "department": "Product Management",
+    "salary": 145000.00,
+    "teamSize": 8,
+    "directReports": ["Alice Smith", "Bob Williams", "Carol Martinez"]
+  }
+}
+
+###
+
+### 3. Valid Student Request
+### Expected: 200 OK
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 3,
+  "payload": {
+    "id": "STU-001",
+    "name": "Emma Wilson",
+    "age": 21,
+    "major": "Computer Science",
+    "gpa": 3.85,
+    "year": 3,
+    "studentId": "CS2023-0789"
+  }
+}
+
+###
+
+### 4. Invalid Enum Value
+### Expected: 400 Bad Request
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 99,
+  "payload": {
+    "id": "TEST-001",
+    "name": "Test User",
+    "age": 30
+  }
+}
+
+###
+
+### 5. Payload Mismatch - Employee payload with Manager enum
+### Expected: 400 Bad Request
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "EMP-999",
+    "name": "Wrong Type",
+    "age": 30,
+    "department": "Engineering",
+    "salary": 75000.00,
+    "employeeNumber": "E999999"
+  }
+}
+
+###
+
+### 6. Validation Failure - Age Too High
+### Expected: 400 Bad Request
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 1,
+  "payload": {
+    "id": "EMP-BAD-AGE",
+    "name": "Ancient Employee",
+    "age": 200,
+    "department": "History",
+    "salary": 50000.00,
+    "employeeNumber": "E000001"
+  }
+}
+
+###
+
+### 7. Validation Failure - Negative Age
+### Expected: 400 Bad Request
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 3,
+  "payload": {
+    "id": "STU-BAD-AGE",
+    "name": "Negative Age Student",
+    "age": -5,
+    "major": "Mathematics",
+    "gpa": 4.0,
+    "year": 1,
+    "studentId": "CS2024-9999"
+  }
+}
+
+###
+
+### 8. Validation Failure - Empty ID
+### Expected: 400 Bad Request
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "",
+    "name": "No ID Manager",
+    "age": 45,
+    "department": "Sales",
+    "salary": 120000.00,
+    "teamSize": 5,
+    "directReports": ["Person A", "Person B"]
+  }
+}
+
+###
+
+### 9. Validation Failure - Empty Name
+### Expected: 400 Bad Request
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 1,
+  "payload": {
+    "id": "EMP-NO-NAME",
+    "name": "",
+    "age": 28,
+    "department": "IT",
+    "salary": 65000.00,
+    "employeeNumber": "E777777"
+  }
+}
+
+###
+
+### 10. Edge Case - Age at Minimum Boundary
+### Expected: 200 OK
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 3,
+  "payload": {
+    "id": "STU-NEWBORN",
+    "name": "Baby Student",
+    "age": 0,
+    "major": "Early Education",
+    "gpa": 4.0,
+    "year": 1,
+    "studentId": "CS2024-0000"
+  }
+}
+
+###
+
+### 11. Edge Case - Age at Maximum Boundary
+### Expected: 200 OK
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "MGR-OLDEST",
+    "name": "Senior Manager",
+    "age": 150,
+    "department": "Executive",
+    "salary": 250000.00,
+    "teamSize": 50,
+    "directReports": ["VP1", "VP2", "VP3"]
+  }
+}

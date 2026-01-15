@@ -1,0 +1,79 @@
+### Validation Failure - Invalid Age (Too High)
+### Expected: 400 Bad Request - Age validation error
+### Age 200 exceeds the maximum allowed (150)
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 1,
+  "payload": {
+    "id": "EMP-BAD-AGE",
+    "name": "Ancient Employee",
+    "age": 200,
+    "department": "History",
+    "salary": 50000.00,
+    "employeeNumber": "E000001"
+  }
+}
+
+###
+
+### Validation Failure - Invalid Age (Negative)
+### Expected: 400 Bad Request - Age validation error
+### Age -5 is below the minimum allowed (0)
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 3,
+  "payload": {
+    "id": "STU-BAD-AGE",
+    "name": "Negative Age Student",
+    "age": -5,
+    "major": "Mathematics",
+    "gpa": 4.0,
+    "year": 1,
+    "studentId": "CS2024-9999"
+  }
+}
+
+###
+
+### Validation Failure - Empty ID
+### Expected: 400 Bad Request - ID validation error
+### ID cannot be empty or whitespace
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "   ",
+    "name": "No ID Manager",
+    "age": 45,
+    "department": "Sales",
+    "salary": 120000.00,
+    "teamSize": 5,
+    "directReports": ["Person A", "Person B"]
+  }
+}
+
+###
+
+### Validation Failure - Empty Name
+### Expected: 400 Bad Request - Name validation error
+### Name cannot be empty or whitespace
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 1,
+  "payload": {
+    "id": "EMP-NO-NAME",
+    "name": "",
+    "age": 28,
+    "department": "IT",
+    "salary": 65000.00,
+    "employeeNumber": "E777777"
+  }
+}

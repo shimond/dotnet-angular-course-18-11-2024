@@ -1,0 +1,17 @@
+### Valid Student Request
+### Expected: 200 OK with success message containing student academic information
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 3,
+  "payload": {
+    "id": "STU-001",
+    "name": "Emma Wilson",
+    "age": 21,
+    "major": "Computer Science",
+    "gpa": 3.85,
+    "year": 3,
+    "studentId": "CS2023-0789"
+  }
+}

@@ -1,0 +1,14 @@
+### Invalid Enum Value
+### Expected: 400 Bad Request - Unsupported PersonType
+### PersonType 99 does not exist in the enum
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 99,
+  "payload": {
+    "id": "TEST-001",
+    "name": "Test User",
+    "age": 30
+  }
+}

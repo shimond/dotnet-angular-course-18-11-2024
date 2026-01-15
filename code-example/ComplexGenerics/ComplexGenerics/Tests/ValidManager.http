@@ -1,0 +1,17 @@
+### Valid Manager Request
+### Expected: 200 OK with success message containing manager details including team info
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 2,
+  "payload": {
+    "id": "MGR-001",
+    "name": "Sarah Johnson",
+    "age": 42,
+    "department": "Product Management",
+    "salary": 145000.00,
+    "teamSize": 8,
+    "directReports": ["Alice Smith", "Bob Williams", "Carol Martinez"]
+  }
+}

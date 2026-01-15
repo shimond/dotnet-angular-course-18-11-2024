@@ -1,0 +1,16 @@
+### Valid Employee Request
+### Expected: 200 OK with success message containing employee details
+POST https://localhost:7001/person/handle
+Content-Type: application/json
+
+{
+  "personType": 1,
+  "payload": {
+    "id": "EMP-001",
+    "name": "John Doe",
+    "age": 35,
+    "department": "Engineering",
+    "salary": 95000.50,
+    "employeeNumber": "E123456"
+  }
+}
