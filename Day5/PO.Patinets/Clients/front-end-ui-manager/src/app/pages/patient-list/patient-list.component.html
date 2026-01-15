@@ -1,0 +1,50 @@
+<div>
+<mat-table [dataSource]="store.allPatients()">
+    <!-- Add columns with Hebrew titles -->
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>מספר זיהוי</mat-header-cell>
+        <mat-cell *matCellDef="let patient">{{ patient.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>שם</mat-header-cell>
+        <mat-cell *matCellDef="let patient">{{ patient.name }}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let patient">
+            <button mat-icon-button color="primary" (click)="store.selectPatient(patient.id)" >
+                <mat-icon>check</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    (click)="selectPatient(patient)"
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+</div>
+<div class="patient-area">
+@if(store.selectedPatient())
+{
+<div>
+    <h2>פרטי מטופל</h2>
+    <p>שם: {{ store.selectedPatient()?.name }}</p>
+    <p>מספר זיהוי: {{ store.selectedPatient()?.id }}</p>
+    <p>תאריך לידה: {{ store.selectedPatient()?.birthdate | date:'MM/yyyy' }}</p>
+    <p>מין: {{ store.selectedPatient()?.gender}}</p>
+</div>
+
+<div>
+    <h2>חום מוניטור</h2>
+    @for(status of store.monitorStatus(); track status)
+    {
+        <p>{{ status.date | date:'dd/MM/yyyy HH:mm' }}: {{ status.fever }}°C</p>
+    }
+</div>
+}
+</div>

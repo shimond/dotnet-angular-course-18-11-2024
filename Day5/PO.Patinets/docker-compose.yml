@@ -1,0 +1,61 @@
+services:
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"  
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y  # Accepts the End User License Agreement
+      - SA_PASSWORD=YourStrong!Passw0rd  # The password for the 'sa' user (system administrator)
+      - MSSQL_PID=Express  # Choose edition (Express, Developer, etc.)
+    ports:
+      - "1435:1433"
+    volumes:
+        - sql_data:/var/opt/mssql
+  
+        
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Port for AMQP protocol
+      - "15672:15672" # Port for RabbitMQ management interface
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+### INNER SERVICES ###
+  patients.catalogapi:
+    container_name: patients_catalogapi
+    image: ${DOCKER_REGISTRY-}patientscatalogapi
+    build:
+      context: .
+      dockerfile: Patients.CatalogAPI/Dockerfile
+    depends_on:
+        - sqlserver
+
+
+  monitoringapi:
+    container_name: monitoringapi
+    image: ${DOCKER_REGISTRY-}monitoringapi
+    build:
+      context: .
+      dockerfile: MonitoringAPI/Dockerfile
+    depends_on:
+        - redis
+
+  clientapplcationbff:
+    image: ${DOCKER_REGISTRY-}clientapplcationbff
+    build:
+      context: .
+      dockerfile: ClientApplcationBFF/Dockerfile
+
+
+volumes:
+  sql_data:
+    driver: local

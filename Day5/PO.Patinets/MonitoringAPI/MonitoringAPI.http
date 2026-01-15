@@ -1,0 +1,12 @@
+@MonitoringAPI_HostAddress = http://localhost:5275
+
+GET {{MonitoringAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+
+POST http://localhost:1147/api/monitor/monitor-patient
+Content-Type: application/json
+
+{"patientId":2,"fever":40.2}
