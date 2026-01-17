@@ -30,13 +30,14 @@ app.MapPost("/person/handle", async (
 {
     try
     {
+        var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
         PersonBaseDto person = request.PersonType switch
         {
-            PersonType.Employee => request.Payload.Deserialize<EmployeeDto>()
+            PersonType.Employee => request.Payload.Deserialize<EmployeeDto>(options)
                 ?? throw new InvalidOperationException("Failed to deserialize Employee payload."),
-            PersonType.Manager => request.Payload.Deserialize<ManagerDto>()
+            PersonType.Manager => request.Payload.Deserialize<ManagerDto>(options)
                 ?? throw new InvalidOperationException("Failed to deserialize Manager payload."),
-            PersonType.Student => request.Payload.Deserialize<StudentDto>()
+            PersonType.Student => request.Payload.Deserialize<StudentDto>(options)
                 ?? throw new InvalidOperationException("Failed to deserialize Student payload."),
             _ => throw new ArgumentException($"Unsupported PersonType: {request.PersonType}")
         };
